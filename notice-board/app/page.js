@@ -1,7 +1,7 @@
-import { connectDB } from "./database";
+import { connectDB } from "./api/database";
 
 export default async function Home() {
-  let client = await connectDB;
+  const client = await connectDB;
   const db = client.db('NextForum');
   let result = await db.collection('posts').find().toArray();
 
