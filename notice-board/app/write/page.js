@@ -10,12 +10,15 @@ export default function Write() {
 
     const form = document.postForm;
 
-    console.log(form.title.value, form.content.value)
+    console.log(form.title.value, form.content.value);
 
-    fetch("/api/post", { method: "POST", body: JSON.stringify({
-      title: form.title.value,
-      content: form.content.value,
-    })});
+    fetch("/api/post", {
+      method: "POST",
+      body: JSON.stringify({
+        title: form.title.value,
+        content: form.content.value,
+      }),
+    });
 
     router.push("/list");
   };

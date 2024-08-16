@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { connectDB } from "../../app/api/database";
 
 export default async function handler(req, res) {
@@ -9,7 +10,17 @@ export default async function handler(req, res) {
 
     switch (req.method) {
       case "GET":
+        let getResult = {};
+        
+        if (req.query.id) {
+          getResult = await db.collection('posts').findOne({ _id: new ObjectId(req.query.id) });
+        } else {
+          getResult = await db.collection('posts').find().toArray();
+        }
+
+        res.status(200).json(getResult);
         break;
+
       case "POST":
         const result = await db.collection('posts').insertOne({
           title: data.title,
@@ -17,8 +28,19 @@ export default async function handler(req, res) {
         });
     
         res.status(200).json(result);
-
         break;
+
+      case "PUT":
+        const updateResult = await db.collection('posts').updateOne({ _id: new ObjectId(data.id)}, {
+          $set: {
+            title: data.title,
+            content: data.content,
+          }
+        });
+
+        res.status(200).redirect('back');
+        break;
+
       default:
         res.send("hi");
         break;
