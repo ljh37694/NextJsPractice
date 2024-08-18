@@ -39,3 +39,17 @@
   border-right: 1px solid black;
   height: 100%;
 }
+
+.list-del-btn {
+  color: red !important;
+  background-color: #eee;
+  width: 40px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.list-del-btn:hover {
+  color: #eee !important;
+  background-color: red;
+}

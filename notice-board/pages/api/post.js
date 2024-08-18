@@ -30,17 +30,6 @@ export default async function handler(req, res) {
         res.status(200).json(result);
         break;
 
-      case "PUT":
-        const updateResult = await db.collection('posts').updateOne({ _id: new ObjectId(data.id)}, {
-          $set: {
-            title: data.title,
-            content: data.content,
-          }
-        });
-
-        res.status(200).redirect('back');
-        break;
-
       default:
         res.send("hi");
         break;
