@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
           <p>Forum</p>
           <Link href="/">Home</Link>
           <Link href="/list">List</Link>
+          <Link href="/write">Write</Link>
         </nav>
         {children}
       </body>

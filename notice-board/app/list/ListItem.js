@@ -7,7 +7,7 @@ export default function ListItem(props) {
 
   const onClick = (e) => {
     fetch('/api/deletePost?id=' + _id, {
-      method: 'GET',
+      method: 'DELETE',
     })
       .then(() => {
         e.target.parentElement.style.opacity = 0;
