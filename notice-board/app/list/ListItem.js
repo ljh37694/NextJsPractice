@@ -5,10 +5,17 @@ import Link from "next/link";
 export default function ListItem(props) {
   const { _id, title, content } = JSON.parse(props.data);
 
-  const onClick = () => {
+  const onClick = (e) => {
     fetch('/api/deletePost?id=' + _id, {
       method: 'GET',
-    });
+    })
+      .then(() => {
+        e.target.parentElement.style.opacity = 0;
+
+        setTimeout(() => {
+          e.target.parentElement.style.display = "none";
+        }, 1000);
+      });
   }
 
   return (
