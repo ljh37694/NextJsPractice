@@ -7,7 +7,7 @@ export const revaildate = 60; // 60초 동안 caching
 export default async function List() {
   const client = await connectDB;
   const db = client.db("NextForum");
-  let result = await db.collection("posts").find().toArray();
+  const result = await db.collection("posts").find().toArray();
 
   return (
     <div className="list-bg">

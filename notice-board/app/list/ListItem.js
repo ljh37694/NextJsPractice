@@ -1,9 +1,11 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function ListItem(props) {
-  const { _id, title, content } = JSON.parse(props.data);
+  const { _id, title, content, author } = JSON.parse(props.data);
+  const session = useSession();
 
   const onClick = (e) => {
     fetch('/api/deletePost?id=' + _id, {
@@ -25,7 +27,7 @@ export default function ListItem(props) {
         <h4>{title}</h4>
       </Link>
       <p>{content}</p>
-      <p className="list-del-btn" onClick={onClick}>del</p>
+      { session.user.email === author ? <p className="list-del-btn" onClick={onClick}>del</p> : null }
     </div>
   );
 }
