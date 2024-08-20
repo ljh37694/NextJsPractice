@@ -55,3 +55,13 @@
   color: #eee !important;
   background-color: red;
 }
+
+.default-btn {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #3c85e4;
+  color: #fff;
+  border: none;
+  margin-left: 10px;
+}
