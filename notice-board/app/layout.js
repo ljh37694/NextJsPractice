@@ -26,6 +26,7 @@ export default async function RootLayout({ children }) {
           <Link href="/">Home</Link>
           <Link href="/list">List</Link>
           <Link href="/write">Write</Link>
+          <Link href="/register">SignUp</Link>
           { session ? <LogoutButton /> : <LoginButton /> }
         </nav>
         {children}
