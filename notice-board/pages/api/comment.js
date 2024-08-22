@@ -5,6 +5,8 @@ export default async function handler(req, res) {
     const client = await connectDB;
     const db = client.db('NextForum');
 
+    console.log(req.method);
+
     if (req.method === "POST") {
       const { content, author, post_id } = req.body;
       const result = await db.collection('comments').insertOne({
@@ -13,7 +15,15 @@ export default async function handler(req, res) {
         post_id,
       });
 
-      res.statsu(200).json(result);
+      res.status(200).json(result);
+    }
+
+    else if (req.method === "GET") {
+      const result = await db.collection('comments').find({
+        post_id: req.query.id,
+      }).toArray();
+
+      res.status(200).json(result);
     }
   } catch (e) {
     res.status(200).json(e);
