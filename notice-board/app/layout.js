@@ -5,6 +5,8 @@ import LoginButton from "./LoginButton";
 import { getServerSession } from "next-auth";
 import LogoutButton from "./LogoutButton";
 import { authOptions } from "../pages/api/auth/[...nextauth]";
+import { cookies } from "next/headers";
+import ThemeButton from "./ThemeButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,12 +17,13 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-
-  console.log(session);
+  const theme = cookies().get('theme');
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={
+        theme != undefined && theme.value == 'dark' ? 'dark-theme' : ''
+      }>
         <nav id="top-nav">
           <p>Forum</p>
           <Link href="/">Home</Link>
@@ -28,6 +31,7 @@ export default async function RootLayout({ children }) {
           <Link href="/write">Write</Link>
           <Link href="/register">SignUp</Link>
           { session ? <LogoutButton /> : <LoginButton /> }
+          <ThemeButton />
         </nav>
         {children}
       </body>
